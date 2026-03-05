@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <title>Schmantlmanns Übersicht</title>
+</head>
+
+<body>
+
+    <div class="eingabebox">
+        <p>User Logins</p>
+
+        <div id="liste" class="box">
+            <!-- Nutzer kommen hier dran gehängt -->
+        </div>
+
+        <button id="alleLöschen" onclick="alleLöschen()">alle löschen (geht leider nicht)</button>
+        <a href="LoginSeite.html" class="abstand">Html: Back</a>
+    </div>
+
+</body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Sixtyfour:SCAN@-33&display=swap');
+
+    body {
+        font-family: Sixtyfour;
+        background: linear-gradient(#172872, #e43fd6);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: url("wii-pointer-blue.cur"), crosshair;
+    }
+
+    .eingabebox {
+        background: linear-gradient(#7589e4, #fa93f5);
+        padding: 30px;
+        border-radius: 12px;
+        width: 300px;
+        box-shadow: 0 10px 25px #0936ff33;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: url("wii-pointer-blue.cur"), crosshair;
+
+    }
+
+    p {
+        text-align: center;
+        font-style: Boldonse;
+        cursor: url("wii-pointer-blue.cur"), crosshair;
+    }
+
+    .box {
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 15px;
+        box-shadow: 0 5px 15px rgba(72, 13, 83, 0.2);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: url("wii-pointer-blue.cur"), crosshair;
+    }
+
+    .nutzerbox {
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        width: 90%;
+        background-color: #e7ebff;
+        cursor: url("wii-pointer-blue.cur"), crosshair;
+    }
+
+    .nutzerbox p {
+        margin: 6px;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #667eea;
+        border-style: dashed;
+        color: rgb(80, 16, 77);
+        margin-top: 10px;
+        border-radius: 16px;
+        font-size: 18px;
+        cursor: crosshair;
+    }
+
+    button:hover {
+        background: #eb4545;
+        font-style: italic;
+        cursor: not-allowed;
+    }
+
+    .abstand {
+        margin-top: 10px;
+        text-decoration: none;
+        color: rgb(34, 66, 211);
+        cursor: url("wii-pointer-blue.cur"), crosshair;
+    }
+</style>
+
+<script>
+    //liste zurrückholen
+    var liste = document.getElementById("liste");
+
+    //zeigt alle gesp. User v. LocalStorage an
+    function zeigeBenutzer() {
+        //von Json in Array umwandeln
+        var users = JSON.parse(localStorage.getItem("users"));
+        //leeres Array falls keine User Angegeben snid
+        if (!users) users = [];
+
+        for (var i = 0; i < users.length; i++) {
+            var user = users[i];
+
+            //alles gruppieren und anzeigen lassen
+            var div = document.createElement("div");
+            div.className = "nutzerbox";
+
+            var username = document.createElement("p");
+            username.textContent = "Username: " + user.username;
+            div.appendChild(username);
+
+            var email = document.createElement("p");
+            email.textContent = "Email: " + user.email;
+            div.appendChild(email);
+
+            var password = document.createElement("p");
+            password.textContent = "Password: " + user.password;
+            div.appendChild(password);
+
+            var age = document.createElement("p");
+            age.textContent = "Age: " + user.age;
+            div.appendChild(age);
+
+            var role = document.createElement("p");
+            role.textContent = "Role: " + user.role;
+            div.appendChild(role);
+
+            liste.appendChild(div);
+        }
+    }
+
+    function alleLöschen() {
+        LocalStorage.clear();
+        return;
+    }
+
+    zeigeBenutzer();
+</script>
+
+</html>

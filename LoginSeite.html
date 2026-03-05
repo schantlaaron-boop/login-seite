@@ -1,0 +1,142 @@
+<html>
+
+<head>
+
+    <title>Schmantlmanns Login Seite</title>
+
+</head>
+
+<body>
+
+    <div class="eingabebox">
+        <p>Login Seite für Schmantlmann's Website</p>
+
+        <form id="loginForm" class="box">
+            <label for="">Username</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="">E-Mail</label>
+            <input type="email" name="emailaddresse" id="emailaddresse" required>
+
+            <label for="">Password</label>
+            <input type="password" name="Passwort" id="Passwort" required>
+
+            <label for="">Age</label>
+            <input type="date" name="age" id="age" required>
+
+            <label for="">Role</label>
+            <select name="Rolle" id="Role" required>
+                <option value="">Select</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Principal">Principal</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+        <a href="übersichtseite.html" class="mousehoverclick">Your Login Infos!</a>
+    </div>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Sixtyfour:SCAN@-33&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Sixtyfour:SCAN@-33&display=swap');
+
+    body {
+        font-family: Sixtyfour;
+        background: linear-gradient(#172872, #e43fd6);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: url("wii-pointer-blue.cur"), crosshair;
+    }
+
+    .eingabebox {
+        background: linear-gradient(#7589e4, #fa93f5);
+        padding: 30px;
+        border-radius: 12px;
+        width: 300px;
+        box-shadow: 0 10px 25px #0936ff33;
+    }
+
+    p {
+        text-align: center;
+        font-style: Boldonse;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border: 1px solid #23b9ff;
+        cursor: cell;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #667eea;
+        border-style: dashed;
+        color: rgb(255, 255, 255);
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: url("wiicursor.cur"), crosshair;
+    }
+
+    button:hover {
+        background: #5563d6;
+    }
+
+    .mousehoverclick {
+        cursor: url("wiicursor.cur"), crosshair;
+    }
+
+
+</style>
+<script>
+    //Eingabefelder holen
+    var usernameEing = document.getElementById("username");
+    var emailEing = document.getElementById("emailaddresse");
+    var passwordEing = document.getElementById("Passwort");
+    var ageEing = document.getElementById("age");
+    var roleEing = document.getElementById("Role");
+
+    //verhindert neu laden der seite
+    document.getElementById("loginForm").addEventListener("submit", function (preventreload) {
+        preventreload.preventDefault();
+
+        //werte aus den eingaben holen und safen
+        var username = usernameEing.value;
+        var email = emailEing.value;
+        var password = passwordEing.value;
+        var age = ageEing.value;
+        var role = roleEing.value;
+
+        //user "objekt" erstellen
+        var user = {
+            username: username,
+            email: email,
+            password: password,
+            age: age,
+            role: role
+        };
+
+        //User aus Local Storage laden
+        var users = JSON.parse(localStorage.getItem("users"));
+        //falls es leer ist neues leeres array
+        if (!users) {
+            users = [];
+        }
+        // Wird an den user angehangen
+        users.push(user);
+        // Speichert in den LocalStroage
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+    );
+
+</script>
+
+</html>
